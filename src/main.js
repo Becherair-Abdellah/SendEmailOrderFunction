@@ -8,6 +8,10 @@ module.exports = async ({ req, res, log, error }) => {
     if (!order.$id) {
       return res.json({ error: 'Invalid order data' }, 400);
     }
+
+     if (order.$collectionId !== 'order') {
+      return res.json({ error: 'Invalid order collection' }, 400);
+    }
     
     // ALWAYS use your verified domain sender, not personal email
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
